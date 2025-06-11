@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Shield, Award, Heart, Clock, Sparkles } from "lucide-react";
 
 const CustomerAuth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -35,11 +36,23 @@ const CustomerAuth = () => {
     <div className="min-h-screen bg-white">
       <Header />
       
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50 relative overflow-hidden">
+        <div className="absolute top-10 left-10 opacity-20">
+          <Sparkles className="w-16 h-16 text-blue-600" />
+        </div>
+        <div className="absolute bottom-10 right-10 opacity-20">
+          <Heart className="w-20 h-20 text-pink-500" />
+        </div>
+        <div className="container mx-auto px-4 relative">
           <div className="max-w-md mx-auto">
-            <Card className="border-0 shadow-xl">
+            <Card className="border-0 shadow-xl relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-600 to-purple-600"></div>
               <CardHeader className="text-center pb-2">
+                <div className="flex justify-center mb-4">
+                  <div className="bg-blue-100 rounded-full p-4">
+                    <Shield className="w-8 h-8 text-blue-600" />
+                  </div>
+                </div>
                 <CardTitle className="text-2xl font-bold text-gray-900">
                   {isSignUp ? "Create Your Account" : "Welcome Back"}
                 </CardTitle>
@@ -54,7 +67,7 @@ const CustomerAuth = () => {
               <CardContent className="pt-6">
                 {/* Social Login Options */}
                 <div className="space-y-3 mb-6">
-                  <Button variant="outline" className="w-full py-3 text-gray-700 border-gray-300 hover:bg-gray-50">
+                  <Button variant="outline" className="w-full py-3 text-gray-700 border-gray-300 hover:bg-gray-50 shadow-sm">
                     <div className="flex items-center justify-center space-x-2">
                       <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
                         <span className="text-white text-xs font-bold">G</span>
@@ -63,7 +76,7 @@ const CustomerAuth = () => {
                     </div>
                   </Button>
                   
-                  <Button variant="outline" className="w-full py-3 text-gray-700 border-gray-300 hover:bg-gray-50">
+                  <Button variant="outline" className="w-full py-3 text-gray-700 border-gray-300 hover:bg-gray-50 shadow-sm">
                     <div className="flex items-center justify-center space-x-2">
                       <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center">
                         <span className="text-white text-xs font-bold">f</span>
@@ -93,7 +106,7 @@ const CustomerAuth = () => {
                         placeholder="Enter your full name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        className="w-full py-3"
+                        className="w-full py-3 shadow-sm"
                         required
                       />
                     </div>
@@ -109,7 +122,7 @@ const CustomerAuth = () => {
                       placeholder="Enter your email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full py-3"
+                      className="w-full py-3 shadow-sm"
                       required
                     />
                   </div>
@@ -125,7 +138,7 @@ const CustomerAuth = () => {
                         placeholder="Enter your phone number"
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className="w-full py-3"
+                        className="w-full py-3 shadow-sm"
                         required
                       />
                     </div>
@@ -141,7 +154,7 @@ const CustomerAuth = () => {
                       placeholder="Enter your password"
                       value={formData.password}
                       onChange={handleInputChange}
-                      className="w-full py-3"
+                      className="w-full py-3 shadow-sm"
                       required
                     />
                   </div>
@@ -157,7 +170,7 @@ const CustomerAuth = () => {
                         placeholder="Confirm your password"
                         value={formData.confirmPassword}
                         onChange={handleInputChange}
-                        className="w-full py-3"
+                        className="w-full py-3 shadow-sm"
                         required
                       />
                     </div>
@@ -177,7 +190,7 @@ const CustomerAuth = () => {
 
                   <Button 
                     type="submit" 
-                    className="w-full bg-blue-600 hover:bg-blue-700 py-3 text-lg"
+                    className="w-full bg-blue-600 hover:bg-blue-700 py-3 text-lg shadow-lg"
                   >
                     {isSignUp ? "Create Account" : "Sign In"}
                   </Button>
@@ -213,25 +226,39 @@ const CustomerAuth = () => {
 
             {/* Benefits for new users */}
             {isSignUp && (
-              <div className="mt-8 bg-white rounded-lg p-6 shadow-lg">
+              <div className="mt-8 bg-white rounded-lg p-6 shadow-lg relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-blue-500"></div>
+                <div className="flex justify-center mb-4">
+                  <div className="bg-green-100 rounded-full p-3">
+                    <Award className="w-6 h-6 text-green-600" />
+                  </div>
+                </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">
                   Why Join Yasla?
                 </h3>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                      <Shield className="w-4 h-4 text-blue-600" />
+                    </div>
                     <span className="text-gray-600">Easy booking and payment</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                      <Award className="w-4 h-4 text-green-600" />
+                    </div>
                     <span className="text-gray-600">Verified and trusted salons</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                    <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                      <Heart className="w-4 h-4 text-purple-600" />
+                    </div>
                     <span className="text-gray-600">Exclusive offers and discounts</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                    <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                      <Clock className="w-4 h-4 text-orange-600" />
+                    </div>
                     <span className="text-gray-600">24/7 customer support</span>
                   </div>
                 </div>

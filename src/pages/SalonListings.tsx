@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, Star, MapPin, Clock, Filter } from "lucide-react";
+import { Search, Star, MapPin, Clock, Filter, Sparkles, Heart, Award } from "lucide-react";
 
 const SalonListings = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -118,12 +118,27 @@ const SalonListings = () => {
       <Header />
       
       {/* Search and Filter Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-purple-50 py-12">
-        <div className="container mx-auto px-4">
+      <section className="bg-gradient-to-br from-blue-50 to-purple-50 py-12 relative overflow-hidden">
+        <div className="absolute top-10 left-10 opacity-20">
+          <Sparkles className="w-16 h-16 text-blue-600" />
+        </div>
+        <div className="absolute bottom-10 right-10 opacity-20">
+          <Heart className="w-20 h-20 text-pink-500" />
+        </div>
+        <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl font-bold text-gray-900 mb-6 text-center">
-              Discover Amazing Salons Near You
-            </h1>
+            <div className="text-center mb-8">
+              <div className="flex justify-center mb-6">
+                <img 
+                  src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&h=200&fit=crop" 
+                  alt="Beautiful salons"
+                  className="rounded-2xl shadow-lg"
+                />
+              </div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-6">
+                Discover Amazing Salons Near You
+              </h1>
+            </div>
             
             {/* Search Bar */}
             <div className="relative mb-6">
@@ -133,7 +148,7 @@ const SalonListings = () => {
                 placeholder="Search for salons, services, or locations..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 py-3 text-lg"
+                className="pl-12 py-3 text-lg shadow-lg border-0"
               />
             </div>
 
@@ -146,8 +161,8 @@ const SalonListings = () => {
                   onClick={() => setSelectedFilter(filter)}
                   className={`${
                     selectedFilter === filter 
-                      ? "bg-blue-600 hover:bg-blue-700" 
-                      : "border-blue-600 text-blue-600 hover:bg-blue-50"
+                      ? "bg-blue-600 hover:bg-blue-700 shadow-lg" 
+                      : "border-blue-600 text-blue-600 hover:bg-blue-50 shadow-md"
                   }`}
                 >
                   {filter === "All" && <Filter className="w-4 h-4 mr-2" />}
@@ -160,16 +175,18 @@ const SalonListings = () => {
       </section>
 
       {/* Results Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
+      <section className="py-12 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-blue-50/30"></div>
+        <div className="container mx-auto px-4 relative">
           <div className="max-w-6xl mx-auto">
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-2xl font-semibold text-gray-900">
+              <h2 className="text-2xl font-semibold text-gray-900 flex items-center">
+                <Award className="w-6 h-6 mr-2 text-blue-600" />
                 {filteredSalons.length} salons found
               </h2>
               <div className="flex items-center space-x-4">
                 <span className="text-gray-600">Sort by:</span>
-                <select className="border border-gray-300 rounded-lg px-3 py-2">
+                <select className="border border-gray-300 rounded-lg px-3 py-2 shadow-sm">
                   <option>Distance</option>
                   <option>Rating</option>
                   <option>Price: Low to High</option>
@@ -180,22 +197,25 @@ const SalonListings = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredSalons.map((salon) => (
-                <Card key={salon.id} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+                <Card key={salon.id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
                   <div className="relative">
                     <img 
                       src={salon.image} 
                       alt={salon.name}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     {salon.discount && (
-                      <Badge className="absolute top-3 left-3 bg-red-500 text-white">
+                      <Badge className="absolute top-3 left-3 bg-red-500 text-white shadow-lg">
                         {salon.discount}
                       </Badge>
                     )}
-                    <div className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium ${
+                    <div className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium shadow-lg ${
                       salon.isOpen ? "bg-green-500 text-white" : "bg-gray-500 text-white"
                     }`}>
                       {salon.isOpen ? "Open" : "Closed"}
+                    </div>
+                    <div className="absolute bottom-3 right-3 bg-white/90 rounded-full p-2">
+                      <Heart className="w-4 h-4 text-gray-600 hover:text-red-500 transition-colors cursor-pointer" />
                     </div>
                   </div>
                   
@@ -239,10 +259,10 @@ const SalonListings = () => {
                     </div>
 
                     <div className="flex space-x-2">
-                      <Button className="flex-1 bg-blue-600 hover:bg-blue-700">
+                      <Button className="flex-1 bg-blue-600 hover:bg-blue-700 shadow-sm">
                         Book Now
                       </Button>
-                      <Button variant="outline" className="px-4">
+                      <Button variant="outline" className="px-4 shadow-sm">
                         View Details
                       </Button>
                     </div>
